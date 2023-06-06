@@ -39,7 +39,7 @@ function NavBar() {
             <Nav.Link href="#action2">Link</Nav.Link>
           </Nav>
           { 
-            user
+            user && user.uid
             ? <Button onClick={handleSignOut}>Sign Out</Button>
             : <Button onClick={handleSignIn}>Sign In</Button>
           }

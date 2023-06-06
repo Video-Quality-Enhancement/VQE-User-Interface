@@ -7,6 +7,7 @@ import Protected from './components/Protected';
 import { AuthContextProvider } from './context/AuthContext';
 import Account from './pages/Account';
 import Home from './pages/Home';
+import PushNotification from './components/PushNotification';
 
 
 function App() {
@@ -14,10 +15,21 @@ function App() {
     <div className="App">
       <AuthContextProvider>
         <NavBar />
+        <Protected>
+          <PushNotification />
+        </Protected>
         <Routes>
           <Route path='/' element={<Home />} />
           <Route
             path='/account'
+            element={
+              <Protected>
+                <Account />
+              </Protected>
+            }
+          />
+          <Route
+            path='/account2'
             element={
               <Protected>
                 <Account />

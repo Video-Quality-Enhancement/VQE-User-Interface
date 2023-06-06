@@ -15,14 +15,22 @@ export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState({});
   const navigate = useNavigate();
 
-  const googleSignIn = () => {
+  const googleSignIn = async () => {
     const provider = new GoogleAuthProvider();
     signInWithRedirect(auth, provider);
   };
 
-  const googleSignOut = () => {
-      signOut(auth);
+  const googleSignOut = async () => {
+    await signOut(auth);
+    navigate('/');
   }
+
+  useEffect(() => {
+    if (user && user.uid) {
+      navigate('/account');
+    }
+  }, [user, navigate]);
+
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -31,16 +39,8 @@ export const AuthContextProvider = ({ children }) => {
     });
     return () => {
       unsubscribe();
-    };
-  }, []);
-
-  useEffect(() => {
-    if (user && user.uid) {
-      navigate('/account');
-    } else {
-      navigate('/');
     }
-  }, [user, navigate]);
+  }, []);
 
   return (
     <AuthContext.Provider value={{ googleSignIn, googleSignOut, user }}>
