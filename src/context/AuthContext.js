@@ -22,25 +22,27 @@ export const AuthContextProvider = ({ children }) => {
 
   const googleSignOut = async () => {
     await signOut(auth);
-    navigate('/');
-  }
-
-  useEffect(() => {
-    if (user && user.uid) {
-      navigate('/account');
-    }
-  }, [user, navigate]);
-
+  };
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      console.log('User signed in / out', currentUser);
       setUser(currentUser);
-      console.log('User', currentUser);
     });
     return () => {
       unsubscribe();
     }
   }, []);
+
+  useEffect(() => {
+    if (user && user.uid) {
+      navigate('/enhance', { replace: true });
+    } else if (user == null) {
+      navigate('/', { replace: true });
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user]);
+
 
   return (
     <AuthContext.Provider value={{ googleSignIn, googleSignOut, user }}>
