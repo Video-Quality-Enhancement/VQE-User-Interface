@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { Container, Form, Row, Col, Button } from "react-bootstrap";
-import GDriveUpload from "../components/GDriveUpload";
+
 
 export default function Enhance() {
 
@@ -63,7 +63,7 @@ export default function Enhance() {
 
           <Row className="justify-content-center">
             <Col lg="5" md="6" className="d-flex justify-content-center">
-              <GDriveUpload />
+              
             </Col>
           </Row>
 
