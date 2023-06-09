@@ -1,6 +1,6 @@
 import React from 'react'
 import { Col, Container, Row } from 'react-bootstrap';
-import ExampleVideoEnhancement from '../components/ExampleVideoEnhancement';
+import VideoCardGroup from '../components/VideoCardGroup';
 
 const Home = () => {
   return (
@@ -17,22 +17,22 @@ const Home = () => {
         </Row>
       </Container>
 
-      <ExampleVideoEnhancement
-        exampleTitle='Example 1' 
-        originalVideoUrl='https://drive.google.com/file/d/1iBzg7NJp2pQ1Y3CSLEdpqrS2-6R4vnXW/preview'
+      <VideoCardGroup
+        title='Example 1' 
+        originalVideoUrl='https://drive.google.com/uc?id=1h6uHTM1zRmtLw5g8X5iipUN0iB8T3BDk'
         originalVideoTitle='Original1'
         originalVideoQuality='360p'
-        enhancedVideoUrl='https://drive.google.com/file/d/1iBzg7NJp2pQ1Y3CSLEdpqrS2-6R4vnXW/preview'
+        enhancedVideoUrl='https://drive.google.com/uc?id=1h6uHTM1zRmtLw5g8X5iipUN0iB8T3BDk'
         enhancedVideoTitle='Enhanced1'
         enhancedVideoQuality='1080p'
       />
 
-      <ExampleVideoEnhancement 
-        exampleTitle='Example 2'
-        originalVideoUrl='https://drive.google.com/file/d/1iBzg7NJp2pQ1Y3CSLEdpqrS2-6R4vnXW/preview'
+      <VideoCardGroup 
+        title='Example 2'
+        originalVideoUrl='https://drive.google.com/uc?id=1h6uHTM1zRmtLw5g8X5iipUN0iB8T3BDk'
         originalVideoTitle='Original2'
         originalVideoQuality='360p'
-        enhancedVideoUrl='https://drive.google.com/file/d/1iBzg7NJp2pQ1Y3CSLEdpqrS2-6R4vnXW/preview'
+        enhancedVideoUrl='https://drive.google.com/uc?id=1h6uHTM1zRmtLw5g8X5iipUN0iB8T3BDk'
         enhancedVideoTitle='Enhanced2'
         enhancedVideoQuality='1080p'
       />

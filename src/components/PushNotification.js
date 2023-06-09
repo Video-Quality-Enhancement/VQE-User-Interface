@@ -4,7 +4,7 @@ import { messaging } from "../config/firebase";
 import { Toast, ToastContainer } from 'react-bootstrap';
 
 
-export default function PushNotification() {
+export default function PushNotification(props) {
 
   const [show, setShow] = useState(false);
   const [notification, setNotification] = useState("");
@@ -15,11 +15,16 @@ export default function PushNotification() {
       if (permission === 'granted') {
         console.log('Notification permission granted.');
         
-        getToken(messaging, { vapidKey: process.env.VAPIDKEY }).then((currentToken) => {
+        if(localStorage.getItem('fcmToken') != null) {
+          return;
+        }
+
+        getToken(messaging, { vapidKey: process.env.REACT_APP_VAPIDKEY }).then((currentToken) => {
           if (currentToken) {
   
             // TODO: Send the token to your server and update the UI if necessary
             console.log('currentToken', currentToken);
+            localStorage.setItem('fcmToken', currentToken);
   
           } else {
             // Show permission request UI
@@ -39,6 +44,7 @@ export default function PushNotification() {
   onMessage(messaging, (payload) => {
     console.log('Message received. ', payload);
     setNotification(payload.notification.body);
+    props.setIsVideoEnhanced(true);
   });
 
   useEffect(() => {

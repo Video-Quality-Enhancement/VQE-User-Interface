@@ -49,7 +49,7 @@ function NavBar() {
           >
 
             { user && user.uid && <Link to='/enhance' className='nav-link'>Enhance</Link> }
-            { user && user.uid && <Link to='/history' className='nav-link'>History</Link> }
+            { user && user.uid && <Link to='/enhanced-videos' className='nav-link'>Enhanced Videos</Link> }
 
             <Nav.Link href="https://developers.vqe.ai">API</Nav.Link>
             
