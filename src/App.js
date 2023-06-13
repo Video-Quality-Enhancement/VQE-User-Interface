@@ -9,11 +9,13 @@ import { AuthContextProvider } from './context/AuthContext';
 import Home from './pages/Home';
 import PushNotification from './components/PushNotification';
 import Footer from './components/Footer';
-import Enhance from './pages/Enhance';
 import { useState } from 'react';
 import EnhancedVideos from './pages/EnhancedVideos';
+import EnhancedVideo from './pages/EnhancedVideo';
+import EnhanceVideo from './pages/EnhanceVideo';
+import ProtectedLayout from './layouts/ProtectedLayout';
 
-function App() { // TODO: LATER PUT AuthContextProvider only for NavBar and Protected
+export default function App() { // TODO: LATER PUT AuthContextProvider only for NavBar and Protected
 
   const [isVideoEnhanced, setIsVideoEnhanced] = useState(true);  
 
@@ -25,21 +27,26 @@ function App() { // TODO: LATER PUT AuthContextProvider only for NavBar and Prot
           <PushNotification isVideoEnhanced={isVideoEnhanced} setIsVideoEnhanced={setIsVideoEnhanced}/>
         </Protected>
         <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/enhanced-videos' element={<Protected> <EnhancedVideos /> </Protected>}/>
-          <Route 
-            path='/enhance' 
-            element={
-              <Protected>
-                <Enhance isVideoEnhanced={isVideoEnhanced} setIsVideoEnhanced={setIsVideoEnhanced} />
-              </Protected>
-            }
-          />
+          <Route path="/" element={<Home />} />
+          <Route path="/" element={<ProtectedLayout />}>
+            <Route 
+              path='enhance-video' 
+              element={
+                <EnhanceVideo isVideoEnhanced={isVideoEnhanced} setIsVideoEnhanced={setIsVideoEnhanced} />
+              }
+            />
+            <Route path='enhanced-videos'>
+              <Route index element={<EnhancedVideos />} />
+              <Route path=':requestId' element={<EnhancedVideo />} />
+            </Route>
+
+          </Route>
+          
+          {/* here 'about' routes and others will come */}
+          
         </Routes>
       </AuthContextProvider>
       <Footer />
     </div>
   );
 }
-
-export default App;

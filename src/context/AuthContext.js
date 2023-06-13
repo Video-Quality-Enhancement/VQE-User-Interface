@@ -6,7 +6,7 @@ import {
   onAuthStateChanged,
 } from 'firebase/auth';
 import { auth } from './../config/firebase';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 
 const AuthContext = createContext();
@@ -14,6 +14,7 @@ const AuthContext = createContext();
 export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState({});
   const navigate = useNavigate();
+  const location = useLocation();
 
   const googleSignIn = async () => {
     const provider = new GoogleAuthProvider();
@@ -26,23 +27,22 @@ export const AuthContextProvider = ({ children }) => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+
       console.log('User signed in / out', currentUser);
       setUser(currentUser);
+      if (currentUser && currentUser.uid) {
+        navigate(location.pathname, { replace: true });
+      } else {
+        navigate('/', { replace: true });
+      }
+
     });
+    
     return () => {
       unsubscribe();
     }
-  }, []);
-
-  useEffect(() => {
-    if (user && user.uid) {
-      navigate('/enhance', { replace: true });
-    } else if (user == null) {
-      navigate('/', { replace: true });
-    }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user]);
-
+  }, []);
 
   return (
     <AuthContext.Provider value={{ googleSignIn, googleSignOut, user }}>

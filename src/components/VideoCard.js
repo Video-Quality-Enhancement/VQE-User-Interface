@@ -21,16 +21,29 @@ export default function VideoCard(props) {
     //     </Card.Title>
     //   </Card.Body>
     // </Card>
-    <div className="d-flex m-3">
+    <div className="d-flex">
       <div className="card shadow">
-        <video 
-          src={props.videoUrl} 
-          width="350"
-          height="200"
-          className="card-img-top" 
-          controls>
-          
-        </video>
+        {
+          props.videoUrl && props.videoUrl !== ""
+          ? (<video 
+              src={props.videoUrl} 
+              width="350"
+              height="200"
+              className="card-img-top"
+              controls>
+              Video not supported
+            </video>
+          ): (
+            <div 
+              className="card-img-top d-flex align-items-center justify-content-center border-bottom" 
+              style={{width: 350, height: 200}}
+            >
+              <h2>Video not available</h2>
+            </div>
+          )
+
+        }
+        
 
         <div className="card-body ">
           <h5 className="card-title text-center position-relative">

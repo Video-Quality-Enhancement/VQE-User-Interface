@@ -6,7 +6,7 @@ import { getEnhanceVideos, getEnhanceVideo, enhanceVideo, uploadAndEnhanceVideo 
 import { ToastContainer, toast } from 'react-toastify';
 
 
-export default function Enhance(props) {
+export default function EnhanceVideo(props) {
 
   const [validatedVideoUrl, setValidatedVideoUrl] = useState(false);
   const [validatedVideoUpload, setValidatedVideoUpload] = useState(false);
@@ -82,6 +82,14 @@ export default function Enhance(props) {
       return;
     }
 
+    if(!file.type.includes("video")){
+      toast.error('Only Video File is supported', {
+        position: toast.POSITION.TOP_RIGHT
+      });
+      event.target.reset();
+      return;
+    }
+
     try {
 
       const token = await user.getIdToken();
@@ -139,7 +147,7 @@ export default function Enhance(props) {
 
   return (
     
-    <main className="mt-5">
+    <main className="d-flex flex-grow-1 my-5 align-items-center justify-content-center">
       <ToastContainer />
       { pendingVideoEnhance == null && props.isVideoEnhanced === true &&
         <Container>
@@ -157,14 +165,6 @@ export default function Enhance(props) {
                   type="url"
                   placeholder="https://example.com/videos/video.mp4"
                 />
-
-                <Form.Control.Feedback>
-                  Looks good!
-                </Form.Control.Feedback>
-
-                <Form.Control.Feedback type="invalid">
-                  Please provide a valid Video Url.
-                </Form.Control.Feedback>
 
               </Form.Group>
             </Row>

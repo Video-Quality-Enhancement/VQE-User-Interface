@@ -1,3 +1,10 @@
 .App {
   padding-top: 56px;
 }
+
+/* moved this from style.css to here coz it wasn't inheriting to sub-children from style.css*/
+body {
+  background-image: url("/public/bg-img.jpg");
+  background-size: cover;
+  background-attachment: fixed;
+}
