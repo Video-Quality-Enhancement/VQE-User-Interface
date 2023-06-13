@@ -21,7 +21,7 @@ export default function VideoCardGroup(props) {
         <div className="text-white p-2">
           <strong>{props.title}</strong>
         </div>
-        <div className='d-inline-flex p-3 gap-3 flex-md-row flex-column shadow-lg bg-body-tertiary rounded shadow'>
+        <div className='d-inline-flex p-4 gap-4 flex-md-row flex-column shadow-lg bg-body-tertiary rounded shadow'>
 
           <VideoCard 
             videoUrl={originalVideo.videoUrl}
