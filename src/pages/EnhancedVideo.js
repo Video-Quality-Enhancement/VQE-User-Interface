@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { UserAuth } from '../context/AuthContext';
-import { getEnhanceVideo } from '../api/user';
+import { getVideoEnhance } from '../api/VideoEnhance';
 import VideoCardGroup from '../components/VideoCardGroup';
 import { useParams } from 'react-router-dom';
 
@@ -12,8 +12,9 @@ export default function EnhancedVideo() {
   async function getVideo() {
     try {
 
-      const token = await user.getIdToken();
-      const response = await getEnhanceVideo(token, params.requestId);
+      const idToken = await user.getIdToken();
+      const accessToken = await user.accessToken;
+      const response = await getVideoEnhance(idToken, accessToken, params.requestId);
       if (response == null || response === undefined) {
         return;
       }

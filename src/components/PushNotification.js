@@ -2,12 +2,15 @@ import React, { useState, useEffect } from "react";
 import { getToken, onMessage } from "firebase/messaging";
 import { messaging } from "../config/firebase";
 import { Toast, ToastContainer } from 'react-bootstrap';
+import { UserAuth } from '../context/AuthContext';
+import { addFCMtoken } from "../api/user";
 
 
 export default function PushNotification(props) {
 
   const [show, setShow] = useState(false);
   const [notification, setNotification] = useState("");
+  const { user } = UserAuth();
 
   function requestNotificationPermission() {
 
@@ -15,16 +18,18 @@ export default function PushNotification(props) {
       if (permission === 'granted') {
         console.log('Notification permission granted.');
         
-        if(localStorage.getItem('fcmToken') != null) {
-          return;
-        }
+        // if(localStorage.getItem('fcmToken') != null) {
+        //   return;
+        // }
 
-        getToken(messaging, { vapidKey: process.env.REACT_APP_VAPIDKEY }).then((currentToken) => {
+        getToken(messaging, { vapidKey: process.env.REACT_APP_VAPIDKEY }).then(async (currentToken) => {
           if (currentToken) {
   
             // TODO: Send the token to your server and update the UI if necessary
-            console.log('currentToken', currentToken);
-            localStorage.setItem('fcmToken', currentToken);
+            console.log('current fcm Token', currentToken);
+            const token = await user.getIdToken();
+            await addFCMtoken(token, currentToken);
+            // localStorage.setItem('fcmToken', currentToken);
   
           } else {
             // Show permission request UI
@@ -49,6 +54,7 @@ export default function PushNotification(props) {
 
   useEffect(() => {
     requestNotificationPermission();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {

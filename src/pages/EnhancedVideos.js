@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { UserAuth } from '../context/AuthContext';
-import { getEnhanceVideos } from '../api/user';
+import { getAllVideoEnhance } from '../api/VideoEnhance';
 import VideoCardGroup from '../components/VideoCardGroup';
 
 
@@ -11,8 +11,9 @@ const EnhancedVideos = (props) => {
   async function getVideos() {
     try {
 
-      const token = await user.getIdToken();
-      const response = await getEnhanceVideos(token);
+      const idToken = await user.getIdToken();
+      const accessToken = await user.accessToken;
+      const response = await getAllVideoEnhance(idToken, accessToken);
       if (response == null || response === undefined || response.length === 0) {
         return;
       }

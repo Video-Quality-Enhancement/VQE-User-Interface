@@ -1,66 +1,32 @@
 import axios from 'axios';
 
+export async function upsertUser(idToken) {
 
-export async function getEnhanceVideos(token) {
-
-  const url = `${process.env.REACT_APP_USER_VIDEO_API_BASE_URL}/api/user/videos/`;
+  const url = `${process.env.REACT_APP_USER_API_BASE_URL}/api/user/`;
+  const bodyParameters = {};
   const config = {
-    headers: { Authorization: `Bearer ${token}` }
+    "Content-Type": "application/json",
+    headers: { Authorization: `Bearer ${idToken}` }
   };
 
-  const response = await axios.get(url, config);
+  const response = await axios.put(url, bodyParameters, config);
   return response.data;
 
 }
 
 
-export async function getEnhanceVideo(token, requestId) {
+export async function addFCMtoken(idToken, fcmToken) {
 
-  const url = `${process.env.REACT_APP_USER_VIDEO_API_BASE_URL}/api/user/videos/${requestId}`;
-  const config = {
-    headers: { Authorization: `Bearer ${token}` }
-  };
-
-  const response = await axios.get(url, config);
-  return response.data;
-
-}
-
-
-export async function enhanceVideo(token, videoUrl) {
-
-  const url = `${process.env.REACT_APP_USER_VIDEO_API_BASE_URL}/api/user/videos/enhance`;
+  const url = `${process.env.REACT_APP_USER_API_BASE_URL}/api/user/fcmTokens`;
   const bodyParameters = {
-    videoUrl: videoUrl,
-    responseInterfaces: ["ui", "email"]
+    "FCMtoken": fcmToken
   };
   const config = {
     "Content-Type": "application/json",
-    headers: { Authorization: `Bearer ${token}` }
+    headers: { Authorization: `Bearer ${idToken}` }
   };
 
-  const response = await axios.post(url, bodyParameters, config);
+  const response = await axios.put(url, bodyParameters, config);
   return response.data;
 
-}
-
-
-export async function uploadAndEnhanceVideo(token, file) {
-  const url = `${process.env.REACT_APP_USER_VIDEO_API_BASE_URL}/api/user/videos/upload-and-enhance`;
-    
-  const formData = new FormData();
-  formData.append("video", file);
-  formData.append("responseInterfaces", "ui");
-  formData.append("responseInterfaces", "email");
-  
-  const config = {
-    headers: {
-      "Content-Type": "multipart/form-data",
-      Authorization: `Bearer ${token}`,
-    }
-  };
-
-  const res = await axios.post(url, formData, config);
-  console.log(res.data);
-  return res.data;
 }

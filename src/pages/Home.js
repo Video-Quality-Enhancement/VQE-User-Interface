@@ -44,20 +44,20 @@ export default function Home() {
         
         <VideoCardGroup
           title='Example 1' 
-          originalVideoUrl='https://drive.google.com/uc?id=1h6uHTM1zRmtLw5g8X5iipUN0iB8T3BDk'
+          originalVideoUrl="https://storage.googleapis.com/vqe-public/videoplayback-16secs-360p.mp4"
           originalVideoTitle='Original1'
           originalVideoQuality='360p'
-          enhancedVideoUrl='https://drive.google.com/uc?id=1h6uHTM1zRmtLw5g8X5iipUN0iB8T3BDk'
+          enhancedVideoUrl='https://storage.googleapis.com/vqe-public/enhanced/dbacf31d-4db9-4b78-a2b9-bcb691a061ab.mp4'
           enhancedVideoTitle='Enhanced1'
           enhancedVideoQuality='1080p'
         />
 
         <VideoCardGroup 
           title='Example 2'
-          originalVideoUrl='https://drive.google.com/uc?id=1h6uHTM1zRmtLw5g8X5iipUN0iB8T3BDk'
+          originalVideoUrl='https://storage.googleapis.com/vqe-public/Wildlife.mp4'
           originalVideoTitle='Original2'
           originalVideoQuality='360p'
-          enhancedVideoUrl='https://drive.google.com/uc?id=1h6uHTM1zRmtLw5g8X5iipUN0iB8T3BDk'
+          enhancedVideoUrl='https://storage.googleapis.com/vqe-public/enhanced/f2a9f86b-84c8-450c-bfbf-9479ed3fbbaf.mp4'
           enhancedVideoTitle='Enhanced2'
           enhancedVideoQuality='1080p'
         />
